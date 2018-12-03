@@ -1,0 +1,90 @@
+--NOTE: replace the year in all the queries.
+
+-- top 10 registration state of the car::
+
+CREATE TABLE vehicle_registered_state2014
+ROW FORMAT DELIMITED  FIELDS TERMINATED BY ','
+STORED AS TEXTFILE LOCATION '/user/amahesh3/Group3/master2014/clean_nyc2014/vehicle_registered_state2014'
+AS
+select registration_state, count(registration_state) as number_of_vehicle_registered from clean_nyc2014 group by registration_state order by number_of_vehicle_registered desc limit 10 ;
+
+--plate id -- how many tickets got(count of plate id)---  Vehicle Make ---- vehicle body type ---- top 10 ::
+
+CREATE TABLE tickets_for_plate_id2014
+ROW FORMAT DELIMITED  FIELDS TERMINATED BY ','
+STORED AS TEXTFILE LOCATION '/user/amahesh3/Group3/master2014/clean_nyc2014/tickets_for_plate_id2014'
+AS
+select plate_id , vehicle_body_type, vehicle_make, count(plate_id) as tickets_received from clean_nyc2014 where plate_id != "BLANKPLATE" group by plate_id , vehicle_make, vehicle_body_type  order by tickets_received desc limit 10 ;
+
+--grouping by vehicle type:
+
+CREATE TABLE violations_vehicle_type2014
+ROW FORMAT DELIMITED  FIELDS TERMINATED BY ','
+STORED AS TEXTFILE LOCATION '/user/amahesh3/Group3/master2014/clean_nyc2014/violations_vehicle_type2014'
+AS
+select vehicle_body_type, count(vehicle_body_type) as number_of_vehicles from clean_nyc2014 where vehicle_body_type != "" group by vehicle_body_type order by number_of_vehicles desc limit 10;
+
+--Number of tickets got during public holidays:: (need to specify the name of the holiday)
+
+CREATE TABLE tickets_on_public_holidays2014
+ROW FORMAT DELIMITED  FIELDS TERMINATED BY ','
+STORED AS TEXTFILE LOCATION '/user/amahesh3/Group3/master2014/clean_nyc2014/tickets_on_public_holidays2014'
+AS
+select issue_date, count(issue_date) as number_of_violations from clean_nyc2014 where issue_date in ( "12/25/2014" , "01/01/2014", "07/04/2014", "09/03/2014", "11/28/2014") group by issue_date limit 10;
+
+--which date got more number of tickets::
+
+CREATE TABLE date_high_tickets2014
+ROW FORMAT DELIMITED  FIELDS TERMINATED BY ','
+STORED AS TEXTFILE LOCATION '/user/amahesh3/Group3/master2014/clean_nyc2014/date_high_tickets2014'
+AS
+select issue_date, count(issue_date) as number_of_violations from clean_nyc2014  group by issue_date order by number_of_violations desc limit 5;
+
+--Vehicle make ::
+
+CREATE TABLE violation_wrt_vehicle_make2014
+ROW FORMAT DELIMITED  FIELDS TERMINATED BY ','
+STORED AS TEXTFILE LOCATION '/user/amahesh3/Group3/master2014/clean_nyc2014/violation_wrt_vehicle_make2014'
+AS
+select vehicle_make, count (vehicle_make ) as number_of_violations from clean_nyc2014 group by vehicle_make order by number_of_violations desc limit 5;
+
+-- most violated place in front of / opposite of
+
+CREATE TABLE most_violated_location2014
+ROW FORMAT DELIMITED  FIELDS TERMINATED BY ','
+STORED AS TEXTFILE LOCATION '/user/amahesh3/Group3/master2014/clean_nyc2014/most_violated_location2014'
+AS
+select violation_in_front_of_or_opposite,house_number,street_name,violation_county,count(house_number) as number_of_violations_nearby from clean_nyc2014 group by violation_in_front_of_or_opposite,house_number,street_name,violation_county order by number_of_violations_nearby desc limit 10;
+
+-- least violated place
+
+CREATE TABLE least_violated_location2014
+ROW FORMAT DELIMITED  FIELDS TERMINATED BY ','
+STORED AS TEXTFILE LOCATION '/user/amahesh3/Group3/master2014/clean_nyc2014/least_violated_location2014'
+AS
+select street_name,violation_county,count(street_name) as number_of_violations_nearby from clean_nyc2014 where street_name != '' AND violation_county != '' group by street_name,violation_county order by number_of_violations_nearby asc limit 10;
+
+--vehicles with expiration date (old vehicles)
+--count of cars with expiration year 19**,(before year 2000)
+CREATE TABLE vehicle_count_expired2014
+ROW FORMAT DELIMITED  FIELDS TERMINATED BY ','
+STORED AS TEXTFILE LOCATION '/user/amahesh3/Group3/master2014/clean_nyc2014/vehicle_count_expired2014'
+AS
+select count(vehicle_expiration_date) from clean_nyc2014 where vehicle_expiration_date like '19%';
+
+-- ticket counts with respect to year. 
+
+CREATE TABLE tickets_count_2014
+ROW FORMAT DELIMITED  FIELDS TERMINATED BY ','
+STORED AS TEXTFILE LOCATION '/user/amahesh3/Group3/master2014/clean_nyc2014/tickets_count_2014'
+AS
+select count(summons_number) as number_of_violations from clean_nyc2014;
+
+-- top 5 most occurred violation
+
+CREATE TABLE tickets_description_2014
+ROW FORMAT DELIMITED  FIELDS TERMINATED BY ','
+STORED AS TEXTFILE LOCATION '/user/amahesh3/Group3/master2014/clean_nyc2014/tickets_description_2014'
+AS
+select violation_description, count (violation_description) as number_of_violation from clean_nyc2014 where violation_description != '' group by violation_description order by number_of_violation desc limit 5;
+
