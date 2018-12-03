@@ -1,0 +1,27 @@
+--cleaning year 2014
+
+CREATE TABLE clean_nyc2014 
+ROW FORMAT DELIMITED  FIELDS TERMINATED BY ',' 
+STORED AS TEXTFILE LOCATION '/user/amahesh3/Group3/master2014/clean_nyc2014' 
+AS SELECT summons_number,plate_id,registration_state,plate_type,issue_date,violation_code,vehicle_body_type,vehicle_make,issuing_agency,street_code1,street_code2,street_code3,vehicle_expiration_date,issuer_code,issuer_command,violation_time,time_first_observed,violation_county,violation_in_front_of_or_opposite,house_number,street_name,date_first_observed,vehicle_color,vehicle_year,meter_number,violation_description from nyc_parking2014 where registration_state != 99 OR plate_id != 999 OR vehicle_make != ' ' OR street_code1 != 0 OR street_code2 != 0 OR street_code3 != 0 OR issuer_code != 0 OR time_first_observed != ' ' OR violation_county != ' ' OR violation_in_front_of_or_opposite != ' ' OR house_number != ' ' OR vehicle_color != ' ' OR vehicle_year != 0 OR meter_number != ' ' OR violation_description != ' ';
+
+--cleaning year 2015
+
+CREATE TABLE clean_nyc2015 
+ROW FORMAT DELIMITED  FIELDS TERMINATED BY ',' 
+STORED AS TEXTFILE LOCATION '/user/amahesh3/Group3/master2015/clean_nyc2015' 
+AS SELECT summons_number,plate_id,registration_state,plate_type,issue_date,violation_code,vehicle_body_type,vehicle_make,issuing_agency,street_code1,street_code2,street_code3,vehicle_expiration_date,issuer_code,issuer_command,violation_time,time_first_observed,violation_county,violation_in_front_of_or_opposite,house_number,street_name,date_first_observed,vehicle_color,vehicle_year,meter_number,violation_description from nyc_parking2015 where registration_state != 99 OR plate_id != 999 OR vehicle_make != ' ' OR street_code1 != 0 OR street_code2 != 0 OR street_code3 != 0 OR issuer_code != 0 OR time_first_observed != ' ' OR violation_county != ' ' OR violation_in_front_of_or_opposite != ' ' OR house_number != ' ' OR vehicle_color != ' ' OR vehicle_year != 0 OR meter_number != ' ' OR violation_description != ' ';
+
+--cleaning year 2016
+
+CREATE TABLE clean_nyc2016 
+ROW FORMAT DELIMITED  FIELDS TERMINATED BY ',' 
+STORED AS TEXTFILE LOCATION '/user/amahesh3/Group3/master2016/clean_nyc2016' 
+AS SELECT summons_number,plate_id,registration_state,plate_type,issue_date,violation_code,vehicle_body_type,vehicle_make,issuing_agency,street_code1,street_code2,street_code3,vehicle_expiration_date,issuer_code,issuer_command,violation_time,time_first_observed,violation_county,violation_in_front_of_or_opposite,house_number,street_name,date_first_observed,vehicle_color,vehicle_year,meter_number,violation_description from nyc_parking2016 where registration_state != 99 OR plate_id != 999 OR vehicle_make != ' ' OR street_code1 != 0 OR street_code2 != 0 OR street_code3 != 0 OR issuer_code != 0 OR time_first_observed != ' ' OR violation_county != ' ' OR violation_in_front_of_or_opposite != ' ' OR house_number != ' ' OR vehicle_color != ' ' OR vehicle_year != 0 OR meter_number != ' ' OR violation_description != ' ';
+
+--cleaning year 2017
+
+CREATE TABLE clean_nyc2017 
+ROW FORMAT DELIMITED  FIELDS TERMINATED BY ',' 
+STORED AS TEXTFILE LOCATION '/user/amahesh3/Group3/master2017/clean_nyc2017' 
+AS SELECT summons_number,plate_id,registration_state,plate_type,issue_date,violation_code,vehicle_body_type,vehicle_make,issuing_agency,street_code1,street_code2,street_code3,vehicle_expiration_date,issuer_code,issuer_command,violation_time,time_first_observed,violation_county,violation_in_front_of_or_opposite,house_number,street_name,date_first_observed,vehicle_color,vehicle_year,meter_number,violation_description from nyc_parking2017 where registration_state != 99 OR plate_id != 999 OR vehicle_make != ' ' OR street_code1 != 0 OR street_code2 != 0 OR street_code3 != 0 OR issuer_code != 0 OR time_first_observed != ' ' OR violation_county != ' ' OR violation_in_front_of_or_opposite != ' ' OR house_number != ' ' OR vehicle_color != ' ' OR vehicle_year != 0 OR meter_number != ' ' OR violation_description != ' ';
